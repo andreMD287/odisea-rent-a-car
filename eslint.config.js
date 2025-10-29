@@ -14,7 +14,11 @@ export default tseslint.config(
     "packages",
     "src/contracts/*",
     "!src/contracts/util.ts",
+    "node_modules",
+    ".vite",
+    "build",
   ]),
+
   {
     extends: [
       js.configs.recommended,

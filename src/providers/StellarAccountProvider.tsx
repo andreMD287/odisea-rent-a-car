@@ -1,7 +1,10 @@
 import { IAccount } from "../interfaces/account";
-import { createContext, use, useCallback, useEffect, useState,} from "react";
-import { getAccountFromStorage, getCurrentAccountFromStorage, saveCurrentAccount } from "../utils/local-storage";
-
+import { createContext, use, useCallback, useState } from "react";
+import {
+  getAccountFromStorage,
+  getCurrentAccountFromStorage,
+  saveCurrentAccount,
+} from "../utils/local-storage";
 
 interface StellarContextType {
   currentAccount: string;
@@ -11,14 +14,14 @@ interface StellarContextType {
 }
 
 const StellarAccountContext = createContext<StellarContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export const useStellarAccounts = () => {
   const context = use(StellarAccountContext);
   if (context === undefined) {
     throw new Error(
-      "useStellarAccounts must be used within a StellarAccountProvider"
+      "useStellarAccounts must be used within a StellarAccountProvider",
     );
   }
   return context;
@@ -28,7 +31,7 @@ export const StellarAccountProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const [currentAccount, setCurrentAccountState] = useState<string>(() =>
-    getCurrentAccountFromStorage()
+    getCurrentAccountFromStorage(),
   );
 
   const setCurrentAccount = useCallback((name: string) => {

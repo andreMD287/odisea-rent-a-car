@@ -1,3 +1,5 @@
+import { AccountBalance } from "../interfaces/account";
+
 interface BalanceTableProps {
   balances: AccountBalance[];
   variant?: "primary" | "secondary";

@@ -1,0 +1,64 @@
+{
+  "hash": "4d39fa13",
+  "configHash": "5c5c8009",
+  "lockfileHash": "33837fcc",
+  "browserHash": "553ca4ba",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "7dd8b727",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "5be12c6b",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "1c603681",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.mjs",
+      "file": "react-router-dom.js",
+      "fileHash": "7c2b0cba",
+      "needsInterop": false
+    },
+    "@tanstack/react-query": {
+      "src": "../../node_modules/@tanstack/react-query/build/modern/index.js",
+      "file": "@tanstack_react-query.js",
+      "fileHash": "095dbd43",
+      "needsInterop": false
+    },
+    "@stellar/design-system": {
+      "src": "../../node_modules/@stellar/design-system/build/index.esm.js",
+      "file": "@stellar_design-system.js",
+      "fileHash": "5462c52c",
+      "needsInterop": false
+    },
+    "@stellar/stellar-sdk": {
+      "src": "../../node_modules/@stellar/stellar-sdk/dist/stellar-sdk.min.js",
+      "file": "@stellar_stellar-sdk.js",
+      "fileHash": "7aa77c83",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-7BTQE24S": {
+      "file": "chunk-7BTQE24S.js"
+    },
+    "chunk-NRUB2QSW": {
+      "file": "chunk-NRUB2QSW.js"
+    },
+    "chunk-UNLUE3XC": {
+      "file": "chunk-UNLUE3XC.js"
+    },
+    "chunk-5WRI5ZAA": {
+      "file": "chunk-5WRI5ZAA.js"
+    }
+  }
+}

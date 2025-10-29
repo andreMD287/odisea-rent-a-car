@@ -1,6 +1,10 @@
 import { Horizon, Keypair } from "@stellar/stellar-sdk";
-import { STELLAR_FRIENDBOT_URL, STELLAR_NETWORK, HORIZON_URL } from "../utils/contants";
-import { IKeypair } from '../interfaces/keypair';
+import {
+  STELLAR_FRIENDBOT_URL,
+  STELLAR_NETWORK,
+  HORIZON_URL,
+} from "../utils/contants";
+import { IKeypair } from "../interfaces/keypair";
 import { AccountBalance } from "../interfaces/account";
 import { IAccountBalanceResponse } from "../interfaces/balance";
 
@@ -21,17 +25,15 @@ export class StellarService {
   }
 
   private async getAccount(address: string): Promise<Horizon.AccountResponse> {
-		try {
-			return await this.server.loadAccount(address);
-		} catch (error) {
-			throw new Error('Account not found');
-	}
-}  
-
+    try {
+      return await this.server.loadAccount(address);
+    } catch {
+      throw new Error("Account not found");
+    }
+  }
 
   async getAccountBalance(publicKey: string): Promise<AccountBalance[]> {
-    const account =
-      await this.getAccount(publicKey);
+    const account = await this.getAccount(publicKey);
 
     return account.balances.map((b) => ({
       assetCode:
@@ -42,20 +44,16 @@ export class StellarService {
       amount: b.balance,
     }));
   }
-    
-  
+
   createAccount(): IKeypair {
     const pair = Keypair.random();
     return {
-        publicKey: pair.publicKey(),
-        secretKey: pair.secret(),
+      publicKey: pair.publicKey(),
+      secretKey: pair.secret(),
     };
-    }
-	
+  }
 
-    
-
-      async fundAccount(publicKey: string): Promise<boolean> {
+  async fundAccount(publicKey: string): Promise<boolean> {
     try {
       if (this.network !== "testnet") {
         throw new Error("Friendbot is only available on testnet");
@@ -70,11 +68,10 @@ export class StellarService {
       return true;
     } catch (error: unknown) {
       throw new Error(
-        `Error when funding account with Friendbot: ${error as string}`
+        `Error when funding account with Friendbot: ${error as string}`,
       );
     }
   }
 }
 
-
-    export const stellarService = new StellarService();
+export const stellarService = new StellarService();
