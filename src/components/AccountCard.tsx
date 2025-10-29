@@ -91,9 +91,9 @@ function AccountCard({ name, account, onFund, variant }: AccountCardProps) {
           </div>
         </div>
 
-         {account.balances && account.balances.length > 0 && (
+        {account.balances && account.balances.length > 0 && (
           <BalanceTable balances={account.balances} variant={variant} />
-        )} 
+        )}
       </div>
     </div>
   );

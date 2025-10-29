@@ -18,16 +18,16 @@ export default function AccountManager() {
     forceUpdate({});
   };
 
-    const fundAccount = async (name: string) => {
+  const fundAccount = async (name: string) => {
     const account = getAccount(name);
     if (!account) return;
 
     const response = await stellarService.fundAccount(account.publicKey);
-    
+
     if (!response) return;
 
     const balancesData = await stellarService.getAccountBalance(
-      account.publicKey
+      account.publicKey,
     );
     const updatedAccount: IAccount = {
       ...account,
@@ -39,7 +39,7 @@ export default function AccountManager() {
 
     saveAccountToStorage(name, updatedAccount);
     forceUpdate({});
-  }; 
+  };
 
   return (
     <div className="max-w-screen">

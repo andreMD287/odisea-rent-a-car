@@ -25,6 +25,5 @@ createRoot(document.getElementById("root") as HTMLElement).render(
         </StellarAccountProvider>
       </BrowserRouter>
     </QueryClientProvider>
-  </StrictMode>
+  </StrictMode>,
 );
-
