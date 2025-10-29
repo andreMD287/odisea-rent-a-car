@@ -1,0 +1,15 @@
+{
+  "name": "contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "build": "stellar contract build",
+    "test": "cargo test --manifest-path Cargo.toml"
+  },
+  "devDependencies": {}
+}
