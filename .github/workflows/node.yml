@@ -25,28 +25,36 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      - run: rustup target add wasm32v1-none
+      
+      - name: Setup Rust
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+          source $HOME/.cargo/env
+          rustup target add wasm32v1-none
+      
       - name: Start Stellar Quickstart
         uses: stellar/quickstart@main
         with:
           tag: testing
           network: local
+      
       - run: sudo apt-get update && sudo apt-get install -y libudev-dev libdbus-1-dev pkg-config
+      
       - name: Install cargo-binstall
         uses: cargo-bins/cargo-binstall@v1.15.6
-      - name: Check for stellar-scaffold binary
+      
+      - name: Install Stellar CLI tools
         run: |
-          if ! command -v stellar-scaffold &> /dev/null; then
-            echo "stellar-scaffold not found, installing..."
-            cargo binstall stellar-scaffold-cli
-          else
-            echo "stellar-scaffold already installed. Clear cache to force reinstall."
-          fi
-      - run: npm ci
+          cargo binstall stellar-cli --version 0.8.0 -y
+          cargo binstall stellar-scaffold-cli -y
+      
+      - run: npm ci --legacy-peer-deps
+      
       - run: npm run lint
       - run: npx prettier . --check
       - name: Build clients before building the project
         run: STELLAR_SCAFFOLD_ENV=production stellar-scaffold build --build-clients --no-cache
+      
       - run: npm run install:contracts
       - run: npm run build
       - name: Run tests
