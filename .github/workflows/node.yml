@@ -16,7 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      # Setup Node.js primero para resolver conflictos de versión
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -33,12 +32,11 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
       
-      # Setup Rust toolchain
       - name: Setup Rust
         run: |
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           source $HOME/.cargo/env
-          rustup target add wasm32v1-none
+          rustup target add wasm32-unknown-unknown
       
       - name: Start Stellar Quickstart
         uses: stellar/quickstart@main
@@ -48,13 +46,22 @@ jobs:
       
       - run: sudo apt-get update && sudo apt-get install -y libudev-dev libdbus-1-dev pkg-config
       
-      - name: Install Stellar CLI tools
+      - name: Install Stellar CLI
         run: |
           source $HOME/.cargo/env
-          # Instalar stellar-cli desde crates.io
-          cargo install stellar-cli --version 0.8.0
-          # Instalar stellar-scaffold si es necesario
+          # Instalar stellar CLI desde el repositorio oficial
+          cargo install --git https://github.com/stellar/stellar-cli --branch main stellar-cli
+      
+      - name: Install stellar-scaffold-cli
+        run: |
+          source $HOME/.cargo/env
           cargo install stellar-scaffold-cli
+      
+      - name: Verify installations
+        run: |
+          source $HOME/.cargo/env
+          stellar --version
+          which stellar
       
       - run: npm ci --legacy-peer-deps
       
