@@ -15,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
-      
+          node-version: "20"
+          cache: "npm"
+
       - uses: actions/cache@v3
         with:
           path: |
@@ -31,45 +31,45 @@ jobs:
             ~/.cargo/git/db/
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-      
+
       - name: Setup Rust
         run: |
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
           source $HOME/.cargo/env
           rustup target add wasm32-unknown-unknown
-      
+
       - name: Start Stellar Quickstart
         uses: stellar/quickstart@main
         with:
           tag: testing
           network: local
-      
+
       - run: sudo apt-get update && sudo apt-get install -y libudev-dev libdbus-1-dev pkg-config
-      
+
       - name: Install Stellar CLI
         run: |
           source $HOME/.cargo/env
           # Instalar stellar CLI desde el repositorio oficial
           cargo install --git https://github.com/stellar/stellar-cli --branch main stellar-cli
-      
+
       - name: Install stellar-scaffold-cli
         run: |
           source $HOME/.cargo/env
           cargo install stellar-scaffold-cli
-      
+
       - name: Verify installations
         run: |
           source $HOME/.cargo/env
           stellar --version
           which stellar
-      
+
       - run: npm ci --legacy-peer-deps
-      
+
       - run: npm run lint
       - run: npx prettier . --check
       - name: Build clients before building the project
         run: STELLAR_SCAFFOLD_ENV=production stellar-scaffold build --build-clients --no-cache
-      
+
       - run: npm run install:contracts
       - run: npm run build
       - name: Run tests
