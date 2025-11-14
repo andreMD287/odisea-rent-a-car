@@ -5,6 +5,7 @@ use soroban_sdk::{contracttype, Address};
 pub enum DataKey {
     Admin,
     Token,
+    ContractBalance,
     Car(Address),
     Rental(Address, Address),
 }
