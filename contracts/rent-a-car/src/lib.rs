@@ -1,6 +1,8 @@
 #![no_std]
+
 mod contract;
-pub mod interfaces;
+mod interfaces;
+mod storage;
 mod tests;
 
 pub use contract::RentACarContract;
