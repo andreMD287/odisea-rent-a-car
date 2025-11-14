@@ -49,13 +49,16 @@ jobs:
       - name: Install Stellar CLI
         run: |
           source $HOME/.cargo/env
-          # Instalar stellar CLI desde el repositorio oficial
-          cargo install --git https://github.com/stellar/stellar-cli --branch main stellar-cli
+          if ! command -v stellar &> /dev/null; then
+            cargo install --git https://github.com/stellar/stellar-cli --branch main stellar-cli --force
+          fi
 
       - name: Install stellar-scaffold-cli
         run: |
           source $HOME/.cargo/env
-          cargo install stellar-scaffold-cli
+          if ! command -v stellar-scaffold &> /dev/null; then
+            cargo install stellar-scaffold-cli --force
+          fi
 
       - name: Verify installations
         run: |
