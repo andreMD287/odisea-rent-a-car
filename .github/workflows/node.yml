@@ -56,11 +56,11 @@ jobs:
               --force
 
       - name: Install stellar-scaffold-cli
-        run: | 
-         source $HOME/.cargo/env
-         if ! command -v stellar-scaffold &> /dev/null; then
-          cargo install stellar-scaffold-cli --force 
-         fi
+        run: |
+          source $HOME/.cargo/env
+          if ! command -v stellar-scaffold &> /dev/null; then
+           cargo install stellar-scaffold-cli --force 
+          fi
 
       - name: Verify installations
         run: |

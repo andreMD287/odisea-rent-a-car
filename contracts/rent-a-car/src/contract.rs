@@ -55,7 +55,7 @@ impl RentACarContractTrait for RentACarContract {
         write_car(env, &owner, &car);
         Ok(())
     }
-
+    //funcion get_car_status
     fn get_car_status(env: &Env, owner: Address) -> Result<CarStatus, Error> {
         if !has_car(env, &owner) {
             return Err(Error::CarNotFound);
