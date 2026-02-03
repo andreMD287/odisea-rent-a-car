@@ -46,11 +46,12 @@ jobs:
 
       - run: sudo apt-get update && sudo apt-get install -y libudev-dev libdbus-1-dev pkg-config
 
-      - name: Install Stellar CLI
+      - name: Install Stellar CLI (prebuilt binary)
         run: |
-         curl -sSf https://stellar.org/install-cli.sh | sh
-         stellar --version
-
+          curl -L https://github.com/stellar/stellar-cli/releases/download/v21.5.0/stellar-cli-x86_64-unknown-linux-gnu.tar.gz \
+          | tar xz
+          sudo mv stellar /usr/local/bin/stellar
+          stellar --version
 
       - name: Install stellar-scaffold-cli
         run: |
