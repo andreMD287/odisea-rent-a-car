@@ -51,7 +51,7 @@ jobs:
           source $HOME/.cargo/env
             cargo install \
               --git https://github.com/stellar/stellar-cli \
-              --rev <commit-de-stellar-cli-del-14-nov> \
+              --rev d5f7a29 \
               stellar-cli \
               --force
 
