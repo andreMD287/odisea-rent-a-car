@@ -48,12 +48,9 @@ jobs:
 
       - name: Install Stellar CLI
         run: |
-          source $HOME/.cargo/env
-            cargo install \
-              --git https://github.com/stellar/stellar-cli \
-              --rev d5f7a29 \
-              stellar-cli \
-              --force
+         curl -sSf https://stellar.org/install-cli.sh | sh
+         stellar --version
+
 
       - name: Install stellar-scaffold-cli
         run: |
